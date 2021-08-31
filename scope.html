@@ -1,0 +1,25 @@
+<script>
+    {
+        let x = 0
+        console.log(x)
+    }
+</script>
+
+<script>
+    // var é global e também local
+    // hoisting: devido var ser uma variável global, o js pega o var x dentro do bloco e o eleva (var x fica fora do {} e dentro do {} teremos x=0 gerando o resultado de undefined)
+    console.log('> existe x antes do bloco? ', x)
+
+    {
+        var x = 0
+    }
+
+    console.log('> existe x depois do bloco?', x)
+</script>
+
+<script>
+    console.log('> existe y antes do bloco? ', y); {
+        let y = 0
+    }
+    console.log('> existe y depois do bloco? ', y)
+</script>
