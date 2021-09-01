@@ -16,7 +16,11 @@ function transformDegree(degree) {
 
     // error flow: now if the person type any other letter than C or F it will give en error
     if (!celsiusExists && !fahrenheitExists) {
-        throw new Error('Degree unidentified')
+        try {
+            throw new Error('Degree unidentified')
+        } catch (error) {
+            console.log(error.message) // when using .message it will only inform 'Degree unidentified' without .message it shows the error message and at which line it happened
+        } // with the try{} catch(error){} inside the if scope my application won't completely stopped if an error is caught
     }
 
     let updatedDegree = Number(degree.toUpperCase().replace('F', '')); // to get the number from the string we are using .replace('F', '') to am empty string and we will transform the string into a number
@@ -34,16 +38,13 @@ function transformDegree(degree) {
     }
 
     return formula(updatedDegree) + degreeSign // Q: what's the point of concatenating with 'C' when i have a variable degreeSign??? - A: just concatanate with degreeSign!!! 
-}
-// now let's see wether or not it works
-try {
-    transformDegree('50Z'); // why can't i see the following trys after an error is caught?
-    console.log(transformDegree('50F'));
-    console.log(transformDegree('50C'));
-    console.log(transformDegree('80F'));
-    console.log(transformDegree('40C'));
-    console.log(transformDegree('110F'));
+        // now let's see wether or not it works
 
-} catch (error) {
-    console.log(error.message); // when using .message it will only inform 'Degree unidentified' without .message it shows: "Error: Degree unidentified at transformDegree (scripts.js:19) at scripts.js:25"
 }
+
+transformDegree('50Z'); // Q: why can't i see the following atempts after an error is caught? A: before i was using try catch outside the function scope so after finding an error the whole application stopped
+console.log(transformDegree('50F'));
+console.log(transformDegree('50C'));
+console.log(transformDegree('80F'));
+console.log(transformDegree('40C'));
+console.log(transformDegree('110F'));
